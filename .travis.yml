@@ -8,7 +8,7 @@ jobs:
   include:
     - stage: build docker image
       script:
-      - echo "Hello from CI" 
+      - echo "Hello from CI 2" 
 
 
 # jobs:
