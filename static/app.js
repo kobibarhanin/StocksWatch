@@ -64,7 +64,7 @@ function generate_chart(stock, market){
                 <div class="tradingview-widget-copyright">
                 <a href="https://www.tradingview.com/symbols/`+market+`-`+stock+`/" rel="noopener" target="_blank">
                 <span class="blue-text">`+stock+` Chart</span></a> 
-                by TradingView</div>
+                </div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                 <script type="text/javascript">
                     new TradingView.widget(
