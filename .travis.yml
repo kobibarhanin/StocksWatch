@@ -8,16 +8,8 @@ jobs:
   include:
     - stage: build docker image
       script:
-      - echo "Hello from CI 2" 
-      - echo " DOCKER USER = Í$DOCKER_USERNAME" 
-
-
-# jobs:
-#   include:
-#     - stage: build docker image
-#       script:
-#       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#       - docker build -t travis-ci-build-stages-demo .
-#       - docker images
-#       - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/travis-ci-build-stages-demo
-#       - docker push $DOCKER_USERNAME/travis-ci-build-stages-demo
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build --rm -t  stockswatch:latest .
+      - docker images
+      - docker tag stockswatch:latest "$DOCKER_USERNAME"/stockswatch:latest
+      - ddocker push "$DOCKER_USERNAME"/stockswatch:latest
