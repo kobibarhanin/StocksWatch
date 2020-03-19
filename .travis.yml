@@ -12,4 +12,4 @@ jobs:
       - docker build --rm -t  stockswatch:latest .
       - docker images
       - docker tag stockswatch:latest "$DOCKER_USERNAME"/stockswatch:latest
-      - ddocker push "$DOCKER_USERNAME"/stockswatch:latest
+      - docker push "$DOCKER_USERNAME"/stockswatch:latest
