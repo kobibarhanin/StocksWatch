@@ -56,15 +56,14 @@ function generate_chart(stock, market){
 
     var chart = `
         <div id="`+stock+`_chart" class="`+column_size+` wide column">    
-            <h2>`+stock+`
+            <h2>
+                <a href="https://www.tradingview.com/symbols/`+market+`-`+stock+`/" rel="noopener" target="_blank">
+                    <span class="blue-text">`+stock+`</span>
+                </a> 
                 <a href="#" id="`+stock+`_close_icon"> <i class="window close icon"></i></a>            
             </h2>
             <div class="tradingview-widget-container">
                 <div id="tradingview_`+stock+`"></div>
-                <div class="tradingview-widget-copyright">
-                <a href="https://www.tradingview.com/symbols/`+market+`-`+stock+`/" rel="noopener" target="_blank">
-                <span class="blue-text">`+stock+` Chart</span></a> 
-                </div>
                 <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                 <script type="text/javascript">
                     new TradingView.widget(
