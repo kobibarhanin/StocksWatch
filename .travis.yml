@@ -9,6 +9,7 @@ jobs:
     - stage: build docker image
       script:
       - echo "Hello from CI 2" 
+      - echo " DOCKER USER = Í$DOCKER_USERNAME" 
 
 
 # jobs:
