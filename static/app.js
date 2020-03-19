@@ -1,60 +1,14 @@
 var column_size = "five wide column";
 
-var stocks = [
-    {
-        symbol: "AAPL",
-        market: "NASDAQ"
-    },
-    {
-        symbol: "MSFT",
-        market: "NASDAQ"
-    },
-    {
-        symbol: "AMZN",
-        market: "NASDAQ"
-    },
-    {
-        symbol: "INTC",
-        market: "NASDAQ"
-    },
-    {
-        symbol: "BA",
-        market: "NYSE"
-    },
-    {
-        symbol: "NKE",
-        market: "NYSE"
-    },
-    {
-        symbol: "DIS",
-        market: "NYSE"
-    }
-];
 
 $(document).ready(function () {
-    var symbols_line = ""
-    for (stock of stocks) {
-        $("#chart_grid").append(generate_chart(stock.symbol, stock.market));
-        $("#chart_grid").on('click', "#"+stock.symbol+"_close_icon", remove_button);
-    }
-
-    $("#add_button").click(function(){
-        symbol_to_add = $("#add_symbol").val()
-        market_to_add = $("#add_market option:selected" ).text();
-        if (add_stock(symbol_to_add, market_to_add)){
-            $("#chart_grid").append(generate_chart(symbol_to_add, market_to_add));
-            $("#chart_grid").on('click', "#"+symbol_to_add+"_close_icon", remove_button);
-        }
-        else{
-            alert('Stock allready added!')
-        }
-    });
+    set_stocks()
+    set_add_button()
 });
 
 
 function generate_chart(stock, market){
-
-    var chart = `
+    return `
         <div id="`+stock+`_chart" class="`+column_size+` wide column">    
             <h2>
                 <a href="https://www.tradingview.com/symbols/`+market+`-`+stock+`/" rel="noopener" target="_blank">
@@ -87,37 +41,39 @@ function generate_chart(stock, market){
             </div>
         </div>
         `;
-    return chart
 }
 
-function add_stock(symbol, market){
-    for (stock of stocks) {
-        if (stock.symbol == symbol){
-            return false
-        }
-    }
-    stocks.push({
-        symbol: symbol,
-        market: market
-    })
-    return true
-}
-
-function del_stock(symbol){
-    console.log('attempting delete: ' + symbol)
-    for (i = 0; i < stocks.length; i++) {
-        console.log(symbol)
-        if (stocks[i].symbol == symbol){
-            console.log('deleting: ' + symbol)
-            stocks.splice(i, 1);
-            return true
-        }
-    }
-    return false
-}
 
 function remove_button(){
     symbol = $(this).attr('id').split("_")[0]
     $("#"+symbol+"_chart").remove();
-    del_stock(symbol);
+    $.getJSON('/delete_stock',{'stock':symbol},function(res){});
+}
+
+
+function set_stocks(){
+    $.getJSON('/get_stocks',{},function(stocks){
+        $.each(stocks,function(index, stock){ 
+            $("#chart_grid").append(generate_chart(stock['symbol'], stock['market']));
+            $("#chart_grid").on('click', "#"+stock['symbol']+"_close_icon", remove_button);
+        });
+    });
+}
+
+
+function set_add_button(){
+    $("#add_button").click(function(){
+        symbol_to_add = $("#add_symbol").val()
+        market_to_add = $("#add_market option:selected" ).text();
+
+        $.getJSON('/add_new_stock',{'symbol':symbol_to_add,'market':market_to_add},function(res){
+            if (res){
+                $("#chart_grid").append(generate_chart(symbol_to_add, market_to_add));
+                $("#chart_grid").on('click', "#"+symbol_to_add+"_close_icon", remove_button);
+            }
+            else{
+                alert('Stock allready added!')
+            }
+        });
+    });
 }
