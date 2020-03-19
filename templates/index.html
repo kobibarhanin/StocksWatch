@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="no-js"> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>StocksWatch</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        
+        <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    </head>
+    <body>
+
+        <div class="ui container" style="width: 80%; background-color: #ffffff; border-radius: 25px; margin: 5%">
+            <h1 class="ui center aligned huge header" >StocksWatch</h1>
+            
+            <div class="ui centered grid" style="margin:3%">
+                <div class="ui action input">
+                    <input id="add_symbol" style="width:50%" type="text" placeholder="Symbols: MSFT, AAPL, etc.">
+                    <select id="add_market" class="ui selection dropdown">
+                      <option selected="" value="NASDAQ">NASDAQ</option>
+                      <option value="NYSE">NYSE</option>
+                    </select>
+                    <div id="add_button" class="ui button">Add</div>
+                  </div>
+            </div>
+
+            <div id="chart_grid" class="ui grid"></div>
+        </div>
+        
+        <script src="../static/app.js" async defer></script>
+    </body>
+</html>
