@@ -4,11 +4,11 @@ import os
 directory = os.path.dirname(os.path.abspath(__file__))
 
 def read_stocks():
-    with open(directory+'/stocks.json', 'r') as f:
+    with open(directory+'/stocks_data/stocks.json', 'r') as f:
         return json.load(f)
 
 def write_stocks(stocks):
-    with open(directory+'/stocks.json', 'w') as fout:
+    with open(directory+'/stocks_data/stocks.json', 'w') as fout:
         json.dump(stocks, fout)
 
 def add_stock(new_stock):

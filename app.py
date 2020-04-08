@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from stocks.stocks import read_stocks, del_stock, add_stock
-
+from shutil import copyfile
+import os
 
 app = Flask(__name__)
 
@@ -33,4 +34,6 @@ def add_new_stock():
 
 
 if __name__ == '__main__':
+    if not os.path.isfile('/app/stocks/stocks_data/stocks.json'):
+        copyfile('/app/stocks/stocks.json', '/app/stocks/stocks_data/stocks.json')
     app.run(debug=True, host='0.0.0.0', port='3100')
